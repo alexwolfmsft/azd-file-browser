@@ -13,7 +13,7 @@ param filename string = 'blob.txt'
 @description('Name of the blob container')
 param containerName string = 'images'
 
-resource sa 'Microsoft.Storage/storageAccounts@2022-09-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageAccountName
   location: location
   sku: {
@@ -41,11 +41,11 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
     environmentVariables: [
       {
         name: 'AZURE_STORAGE_ACCOUNT'
-        value: sa.name
+        value: storageAccount.name
       }
       {
         name: 'AZURE_STORAGE_KEY'
-        secureValue: sa.listKeys().keys[0].value
+        secureValue: storageAccount.listKeys().keys[0].value
       }
       {
         name: 'CONTENT'
@@ -56,5 +56,5 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   }
 }
 
-output storageAccountName string = storageAccountName
-output storageAccountId string = sa.id
+output storageAccountName string = storageAccount.name
+output storageAccountId string = storageAccount.id

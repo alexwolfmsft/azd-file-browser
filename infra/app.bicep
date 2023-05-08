@@ -1,10 +1,17 @@
+@description('The location of where to deploy resources')
 param location string
-param basename string
+
+@description('The base name of the app resources')
+param appBaseName string
+
+@description('The id of the associated storage account')
 param storageId string
+
+@description('The name of the associated storage account')
 param storageName string
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
-  name: '${basename}plan'
+  name: '${appBaseName}plan'
   location: location
   properties: {
     reserved: true
@@ -16,7 +23,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 
 resource webApplication 'Microsoft.Web/sites@2022-03-01' = {
-  name: '${basename}app'
+  name: '${appBaseName}app'
   location: location
   properties: {
     serverFarmId: appServicePlan.id
@@ -35,7 +42,7 @@ resource webSiteConnectionStrings 'Microsoft.Web/sites/config@2020-12-01' = {
   properties: {
     STORAGE_CONNECTION: {
       value: 'DefaultEndpointsProtocol=https;AccountName=${storageName};AccountKey=${listKeys(storageId, '2021-09-01').keys[0].value};EndpointSuffix=core.windows.net'
-      type: 'SQLAzure'
+      type: 'Custom'
     }
   }
 }

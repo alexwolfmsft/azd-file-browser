@@ -8,7 +8,7 @@ param location string = resourceGroup().location
 param storageAccountName string
 
 @description('Name of the blob as it is stored in the blob container')
-param filename string = 'blob.txt'
+param filename string = 'sample.txt'
 
 @description('Name of the blob container')
 param containerName string = 'images'
@@ -25,7 +25,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     name: 'default'
 
     resource container 'containers' = {
-      name: 'images'
+      name: containerName
     }
   }
 }
@@ -47,12 +47,8 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
         name: 'AZURE_STORAGE_KEY'
         secureValue: storageAccount.listKeys().keys[0].value
       }
-      {
-        name: 'CONTENT'
-        value: loadTextContent('blob.txt')
-      }
     ]
-    scriptContent: 'echo "$CONTENT" > ${filename} && az storage blob upload -f ${filename} -c ${containerName} -n ${filename}'
+    scriptContent: 'az storage blob upload -f ${filename} -c ${containerName} -n ${filename}'
   }
 }
 

@@ -19,7 +19,7 @@ module storageAccount 'storage.bicep' = {
   scope: fileBrowserGrp
   params: {
     location: location
-    storageAccountName: '${abbrs.storageStorageAccounts}${environmentName}'
+    storageAccountName: '${environmentName}'
   }
 }
 
@@ -30,5 +30,6 @@ module webApp 'app.bicep' = {
     location: location
     storageId: storageAccount.outputs.storageAccountId
     basename: environmentName
+    storageName: storageAccount.outputs.storageAccountName
   }
 }

@@ -4,5 +4,5 @@ name: azdfilebrowser
 services:
   web:
     project: ./src/web
-    language: dotnet
+    language: csharp
     host: appservice

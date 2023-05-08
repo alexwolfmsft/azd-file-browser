@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome!</h1>
+    <p>These are the files currently stored in your Blob Storage:</p>
+    <ul>
+        @foreach(var file in Model.Files)
+        {
+            <li>@file</li>
+        }
+    </ul>
+</div>

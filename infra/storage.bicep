@@ -20,7 +20,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
 
   resource blobService 'blobServices' = {
     name: 'default'
-
+    
     resource container 'containers' = {
       name: containerName
     }

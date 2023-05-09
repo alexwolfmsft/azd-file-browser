@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 
-namespace FileBrowser.Pages;
+namespace FileManager.Pages;
 
 public class IndexModel : PageModel
 {
@@ -24,7 +24,7 @@ public class IndexModel : PageModel
     {
         var blobClient = _blobService.GetBlobContainerClient("demofiles");
 
-        blobClient.UploadBlob(Upload.FileName, Upload.OpenReadStream());
+        await blobClient.UploadBlobAsync(Upload.FileName, Upload.OpenReadStream());
 
         return RedirectToAction("OnGet");
     }

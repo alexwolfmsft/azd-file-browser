@@ -7,9 +7,6 @@ param location string = resourceGroup().location
 @description('The name of the storage account')
 param storageAccountName string
 
-@description('Name of the blob as it is stored in the blob container')
-param filename string = 'sample.txt'
-
 @description('Name of the blob container')
 param containerName string = 'demofiles'
 
@@ -27,32 +24,6 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     resource container 'containers' = {
       name: containerName
     }
-  }
-}
-
-resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
-  name: 'deployscript-upload-blob'
-  location: location
-  kind: 'AzureCLI'
-  properties: {
-    azCliVersion: '2.26.1'
-    timeout: 'PT5M'
-    retentionInterval: 'PT1H'
-    environmentVariables: [
-      {
-        name: 'AZURE_STORAGE_ACCOUNT'
-        value: storageAccount.name
-      }
-      {
-        name: 'AZURE_STORAGE_KEY'
-        secureValue: storageAccount.listKeys().keys[0].value
-      }
-      {
-        name: 'CONTENT'
-        value: loadTextContent('sample.txt')
-      }
-    ]
-    scriptContent: 'echo "$CONTENT" > ${filename} az storage blob upload -f ${filename} -c ${containerName} -n ${filename}'
   }
 }
 

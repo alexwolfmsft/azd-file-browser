@@ -18,6 +18,17 @@ public class IndexModel : PageModel
         _blobService = blobService;
     }
 
+    [BindProperty]
+    public IFormFile Upload { get; set; }
+    public async Task<IActionResult> OnPostAsync()
+    {
+        var blobClient = _blobService.GetBlobContainerClient("demofiles");
+
+        blobClient.UploadBlob(Upload.FileName, Upload.OpenReadStream());
+
+        return RedirectToAction("OnGet");
+    }
+
     public async Task OnGet()
     {
         var blobClient = _blobService.GetBlobContainerClient("demofiles");

@@ -4,22 +4,32 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome!</h1>
-</div>
-<p>These are the files currently stored in your Blob Storage:</p>
+<h1 class="mb-5 display-5">Welcome to the file manager!</h1>
 
-<div class="alert alert-info">
-    These are the files currently stored in your Blob Storage:
-</div>
+<p>Use this app to upload files to your blob storage account. Uploaded files will appear in the list below.</p>
 
-<div class="alert">Note: Anonymous access is disabled by default on the blob container.</div>
+<form method="post" class="mb-5" enctype="multipart/form-data">
+    <input type="file" asp-for="Upload" />
+    <input type="submit" />
+</form>
 
-<ul class="list-group">
-    @foreach(var file in Model.Files)
-    {
-        var url = string.Format("{0}/{1}/{2}", Model.ContainerURI, file.Name);
-        
-        <li class="list-group-item"><a href="@url">@file.Name</a></li>
-    }
-</ul>
+
+@if (Model.Files.Count > 0)
+{
+    <p>Uploaded files:</p>
+    <ul class="list-group mb-5">
+        @foreach (var file in Model.Files)
+        {
+            var url = string.Format("{0}/{1}", Model.ContainerURI, file.Name);
+
+            <li class="list-group-item"><a href="@url">@file.Name</a></li>
+        }
+    </ul>
+}
+else
+{
+    <p>No files have been uploaded.</p>
+}
+
+<div class="alert alert-info">Note: Anonymous access is disabled by default on the blob container. Links to view the
+    files will not work unless anonymous access is enabled or other authentication configurations are setup.</div>

@@ -9,7 +9,8 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
     private readonly BlobServiceClient _blobService;
-    public List<string> Files { get; set; } = new List<string>();
+    public List<BlobItem> Files { get; set; } = new List<BlobItem>();
+    public string ContainerURI = string.Empty;
 
     public IndexModel(ILogger<IndexModel> logger, BlobServiceClient blobService)
     {
@@ -19,9 +20,13 @@ public class IndexModel : PageModel
 
     public async Task OnGet()
     {
-        await foreach (BlobItem blobItem in _blobService.GetBlobContainerClient("demofiles").GetBlobsAsync())
+        var blobClient = _blobService.GetBlobContainerClient("demofiles");
+
+        ContainerURI = blobClient.Uri.AbsoluteUri;
+        
+        await foreach (BlobItem blobItem in blobClient.GetBlobsAsync())
         {
-            Files.Add(blobItem.Name);
+            Files.Add(blobItem);
         }
     }
 }

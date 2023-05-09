@@ -8,9 +8,18 @@
     <h1 class="display-4">Welcome!</h1>
 </div>
 <p>These are the files currently stored in your Blob Storage:</p>
-<ul>
+
+<div class="alert alert-info">
+    These are the files currently stored in your Blob Storage:
+</div>
+
+<div class="alert">Note: Anonymous access is disabled by default on the blob container.</div>
+
+<ul class="list-group">
     @foreach(var file in Model.Files)
     {
-        <li>@file</li>
+        var url = string.Format("{0}/{1}/{2}", Model.ContainerURI, file.Name);
+        
+        <li class="list-group-item"><a href="@url">@file.Name</a></li>
     }
 </ul>

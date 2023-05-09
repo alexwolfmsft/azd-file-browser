@@ -11,7 +11,7 @@ param storageId string
 param storageName string
 
 @description('The name of the associated storage account')
-param linuxFxVersion string = 'DOTNETCORE|7.0'
+param linuxFxVersion string = 'DOTNETCORE|6.0'
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: '${appBaseName}plan'

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 
-namespace imagegallery.Pages;
+namespace FileBrowser.Pages;
 
 public class IndexModel : PageModel
 {

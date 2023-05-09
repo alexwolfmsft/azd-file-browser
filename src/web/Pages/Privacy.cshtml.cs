@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace imagegallery.Pages;
+namespace FileBrowser.Pages;
 
 public class PrivacyModel : PageModel
 {

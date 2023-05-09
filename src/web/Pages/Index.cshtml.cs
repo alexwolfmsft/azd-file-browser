@@ -19,7 +19,7 @@ public class IndexModel : PageModel
 
     public async Task OnGet()
     {
-        await foreach (BlobItem blobItem in _blobService.GetBlobContainerClient("images").GetBlobsAsync())
+        await foreach (BlobItem blobItem in _blobService.GetBlobContainerClient("demofiles").GetBlobsAsync())
         {
             Files.Add(blobItem.Name);
         }

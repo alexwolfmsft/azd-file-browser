@@ -9,7 +9,7 @@ param environmentName string
 var abbrs = loadJsonContent('./abbreviations.json')
 
 resource fileBrowserGrp 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: '${abbrs.resourcesResourceGroups}-${environmentName}'
+  name: '${abbrs.resourcesResourceGroups}${environmentName}'
   location: location
 }
 

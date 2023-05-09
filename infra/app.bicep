@@ -10,6 +10,9 @@ param storageId string
 @description('The name of the associated storage account')
 param storageName string
 
+@description('The name of the associated storage account')
+param linuxFxVersion string = 'DOTNETCORE|7.0'
+
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: '${appBaseName}plan'
   location: location
@@ -28,7 +31,7 @@ resource webApplication 'Microsoft.Web/sites@2022-03-01' = {
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
-      linuxFxVersion: 'DOTNETCORE|7.0'
+      linuxFxVersion: linuxFxVersion
     }
   }
   tags: {

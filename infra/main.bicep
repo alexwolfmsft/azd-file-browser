@@ -6,8 +6,10 @@ param location string
 @description('Name of the the environment which is used to generate a short unique hash used in all resources.')
 param environmentName string
 
+var abbrs = loadJsonContent('./abbreviations.json')
+
 resource fileBrowserGrp 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: 'rg-${environmentName}'
+  name: '${abbrs.resourcesResourceGroups}-${environmentName}'
   location: location
 }
 
@@ -16,7 +18,7 @@ module storageAccount 'storage.bicep' = {
   scope: fileBrowserGrp
   params: {
     location: location
-    storageAccountName: '${environmentName}storage'
+    storageAccountName: '${abbrs.storageStorageAccounts}${environmentName}storage'
   }
 }
 
@@ -25,7 +27,7 @@ module webApp 'app.bicep' = {
   scope: fileBrowserGrp
   params: {
     location: location
-    appBaseName: environmentName
+    appBaseName: '${abbrs.webSitesAppService}${environmentName}'
     storageId: storageAccount.outputs.storageAccountId
     storageName: storageAccount.outputs.storageAccountName
   }

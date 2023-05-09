@@ -11,7 +11,7 @@ param storageAccountName string
 param filename string = 'sample.txt'
 
 @description('Name of the blob container')
-param containerName string = 'images'
+param containerName string = 'demofiles'
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageAccountName
@@ -47,8 +47,12 @@ resource deploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
         name: 'AZURE_STORAGE_KEY'
         secureValue: storageAccount.listKeys().keys[0].value
       }
+      {
+        name: 'CONTENT'
+        value: loadTextContent('sample.txt')
+      }
     ]
-    scriptContent: 'az storage blob upload -f ${filename} -c ${containerName} -n ${filename}'
+    scriptContent: 'echo "$CONTENT" > ${filename} az storage blob upload -f ${filename} -c ${containerName} -n ${filename}'
   }
 }
 

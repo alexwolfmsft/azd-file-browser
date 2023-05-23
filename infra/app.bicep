@@ -13,6 +13,9 @@ param storageName string
 @description('The name of the associated storage account')
 param linuxFxVersion string = 'DOTNETCORE|6.0'
 
+param applicationInsightsConnectionString string = ''
+param appInsightsInstrumentationKey string = ''
+
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: '${appBaseName}plan'
   location: location
@@ -36,6 +39,27 @@ resource webApplication 'Microsoft.Web/sites@2022-03-01' = {
   }
   tags: {
     'azd-service-name': 'web'
+  }
+  
+  resource configLogs 'config' = {
+    name: 'logs'
+    properties: {
+      applicationLogs: { fileSystem: { level: 'Verbose' } }
+      detailedErrorMessages: { enabled: true }
+      failedRequestsTracing: { enabled: true }
+      httpLogs: { fileSystem: { enabled: true, retentionInDays: 1, retentionInMb: 35 } }
+    }
+  }
+
+}
+
+resource webAppSettings 'Microsoft.Web/sites/config@2022-03-01' = {
+  name: 'appsettings'
+  kind: 'string'
+  parent: webApplication
+  properties: {
+    APPINSIGHTS_INSTRUMENTATIONKEY: appInsightsInstrumentationKey
+    APPLICATIONINSIGHTS_CONNECTION_STRING: applicationInsightsConnectionString
   }
 }
 

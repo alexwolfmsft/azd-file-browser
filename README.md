@@ -32,7 +32,7 @@ The following prerequisites are required to use this application. Please ensure 
 - [.NET SDK 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) - for the web app
 
 ### Quickstart
-To learn how to get started with any `azd` template, follow the steps in [this quickstart](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-csharp) with this template (`alexwolfmsft/azd-file-manager`).
+To learn how to get started with any `azd` template, follow the steps in [this quickstart](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-csharp) with this template (`todo-csharp-cosmos-sql`).
 
 This quickstart will show you how to authenticate on Azure, initialize using a template, provision infrastructure and deploy code on Azure via the following commands:
 

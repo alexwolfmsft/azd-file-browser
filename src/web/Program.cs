@@ -7,6 +7,8 @@ builder.Services.AddRazorPages();
 
 var connection = builder.Configuration.GetConnectionString("STORAGE_CONNECTION");
 
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration);
+
 builder.Services.AddSingleton(new BlobServiceClient(connection));
 
 var app = builder.Build();

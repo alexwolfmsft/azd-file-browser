@@ -23,7 +23,11 @@ A blueprint for getting an ASP.NET Core web app that utilizes Azure Blob Storage
 
 Let's jump in and get this up and running in Azure. When you are finished, you will have a fully functional web app deployed to the cloud. In later steps, you'll see how to setup a pipeline and monitor the application.
 
-### Prerequisites
+[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=lightgrey&logo=github)](https://codespaces.new/alexwolfmsft/azd-file-manager)
+[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Container&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/alexwolfmsft/azd-file-manager)
+
+## Prerequisites
+
 > This template will create infrastructure and deploy code to Azure. If you don't have an Azure Subscription, you can sign up for a [free account here](https://azure.microsoft.com/free/). Make sure you have contributor role to the Azure subscription.
 
 The following prerequisites are required to use this application. Please ensure that you have them all installed locally.
@@ -31,10 +35,7 @@ The following prerequisites are required to use this application. Please ensure 
 - [Azure Developer CLI](https://aka.ms/azd-install)
 - [.NET SDK 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) - for the web app
 
-[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=lightgrey&logo=github)](https://codespaces.new/alexwolfmsft/azd-file-manager)
-[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Container&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/alexwolfmsft/azd-file-manager)
-
-### Quickstart
+## Quickstart
 To learn how to get started with any `azd` template, follow the steps in [this quickstart](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-csharp) with this template (`todo-csharp-cosmos-sql`).
 
 This quickstart will show you how to authenticate on Azure, initialize using a template, provision infrastructure and deploy code on Azure.
@@ -45,7 +46,21 @@ This quickstart will show you how to authenticate on Azure, initialize using a t
 
     [![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=lightgrey&logo=github)](https://codespaces.new/alexwolfmsft/azd-file-manager)
 
-### Run locally
+1. Run the following command from the terminal:
+
+    ```bash
+    azd up
+    ```
+
+### Run in Dev Container
+
+Click here to open in Dev Container
+
+[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Container&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/alexwolfmsft/azd-file-manager)
+
+### Run the template locally
+
+Clone and run `azd` template using the following commands:
 
 ```bash
 # Log in to azd. Only required once per-install.
@@ -58,7 +73,7 @@ azd init --template alexwolfmsft/azd-file-manager
 azd up
 ```
 
-### Application Architecture
+## Application Architecture
 
 This application utilizes the following Azure resources:
 
@@ -67,11 +82,11 @@ This application utilizes the following Azure resources:
 
 > This template provisions resources to an Azure subscription that you will select upon provisioning them. Please refer to the [Pricing calculator for Microsoft Azure](https://azure.microsoft.com/pricing/calculator/) and, if needed, update the included Azure resource definitions found in `infra/main.bicep` to suit your needs.
 
-### Application Code
+## Application Code
 
 This template is structured to follow the [Azure Developer CLI](https://aka.ms/azure-dev/overview). You can learn more about `azd` architecture in [the official documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible?pivots=azd-create#understand-the-azd-architecture).
 
-### Next Steps
+## Next Steps
 
 At this point, you have a complete application deployed on Azure. But there is much more that the Azure Developer CLI can do. These next steps will introduce you to additional commands that will make creating applications on Azure much easier. Using the Azure Developer CLI, you can setup your pipelines, monitor your application, test and debug locally.
 

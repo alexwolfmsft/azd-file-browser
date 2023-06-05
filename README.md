@@ -30,7 +30,7 @@ Let's jump in and get this up and running in Azure. When you are finished, you w
 
 > This template will create infrastructure and deploy code to Azure. If you don't have an Azure Subscription, you can sign up for a [free account here](https://azure.microsoft.com/free/). Make sure you have contributor role to the Azure subscription.
 
-The following prerequisites are required to use this application. Please ensure that you have them all installed locally.
+The following prerequisites are required to use this application locally.
 
 - [Azure Developer CLI](https://aka.ms/azd-install)
 - [.NET SDK 6.0](https://dotnet.microsoft.com/download/dotnet/6.0) - for the web app
